@@ -106,6 +106,7 @@ body{
 .extra-details-cont{
     display: inline-flex;
     align-items: center;
+    gap: 20px;
 }
 
 .extra-details-info > div:nth-last-of-type(-n+2) {

@@ -1,4 +1,10 @@
 const key = 'f46b40ae55e47684a001f5530df452f5'
+const thunderstormCode = "2"
+const drizzleCode = "3"
+const rainCode = "5"
+const snowCode = "6"
+const clearCode = "8"
+const cloudCode = "8"
 
 async function getWeather(city){
     const rawData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${key}&units=metric`, {mode: "cors"});
@@ -45,6 +51,33 @@ async function getWeather(city){
     let updateWind = document.querySelector('.wind')
     updateWind.textContent = wind
 
+    let imgCode = dataJson.weather[0].id.toString()[0]
+    let mainWeatherImg = document.querySelector('.sunny')
+    if(imgCode === thunderstormCode){
+        mainWeatherImg.textContent = "thunderstorm"
+    }
+    if(imgCode === drizzleCode || imgCode === rainCode){
+        mainWeatherImg.textContent = "rainy"
+    }
+    if(imgCode === snowCode){
+        mainWeatherImg.textContent = "cloudy_snowing"
+    }
+    if(imgCode === clearCode){
+        mainWeatherImg.textContent = "cloud"
+    }
+    if(dataJson.weather[0].main === 'Clear'){
+        mainWeatherImg.textContent = "sunny"
+    }
+
+// const thunderstormCode = 2
+// const drizzleCode = 3
+// const rainCode = 5
+// const snowCode = 6
+// const clearCode = 8
+// const cloudCode = 8
+
+    console.log(imgCode)
+    console.log(dataJson)
     console.log(feelsLike)
     console.log(humidity)
     console.log(pressure)
